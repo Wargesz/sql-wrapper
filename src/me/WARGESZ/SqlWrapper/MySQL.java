@@ -9,20 +9,25 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MySQL {
-    private String host = "localhost";
-    private String port = "3306";
-    private String database = "wrapper";
-    private String username = "root";
-    private String password = "";
-    private Connection connection;
+    String host = "localhost";
+    String port = "3306";
+    String database = "wrapper";
+    String username = "root";
+    String password = "";
+    Connection connection;
 
     public boolean isConnected() {
         return (connection == null ? false : true);
     }
 
-    public void connect() throws ClassNotFoundException, SQLException {
+    public void connect(){
         if (!isConnected()) {
-            connection = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+database,username,password);
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
+                System.out.println("Database connected.");
+            } catch (SQLException e) {
+                System.out.println("Database not connected");
+            }
         }
     }
 
